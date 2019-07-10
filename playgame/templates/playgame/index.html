@@ -1,0 +1,84 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'playgame/style.css' %}">
+
+<div class = "board">
+    <div class = "blackStone" style = "left: 4px; top: 4px;"></div>
+    <div class = "whiteStone" style = "left: 44px; top: 44px;"></div>
+<!--
+    {%if stoneList %}
+        <p>{{stoneList}}</p>
+        {% for stone in stoneList %}
+            {% if stone.id|divisibleby:"2" %}
+                <div id = "{{stone.id}}_first" class = "whiteStone"></div>
+                <div id = "{{stone.id}}_second" class = "whiteStone"></div>
+            {% else %}
+                <div id = "{{stone.id}}_first" class = "blackStone"></div>
+                <div id = "{{stone.id}}_second" class = "blackStone">{{stoneList.1.x1}}</div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+-->
+</div>
+
+<script type="text/javascript">
+
+    for (i=1; i<={{stoneList|length}}; i++)
+    {
+        var index = i.toString() ;
+        if (i%2 == 0)//white
+        {
+            document.getElementById(index + "_first").style.marginLeft = convX({{ stoneList.2.x1 }}) ;
+            document.getElementById(index + "_first").style.marginTop = convY({{ stoneList.2.y1 }}) ;
+            document.getElementById(index + "_second").style.marginLeft = convX({{ stoneList.2.x2 }}) ;
+            document.getElementById(index + "_second").style.marginTop = convY({{ stoneList.2.y2 }}) ;
+        }
+        else//balck
+        {
+            document.getElementById(index + "_first").style.marginLeft = convX({{ stoneList.1.x1 }}) ;
+            document.getElementById(index + "_first").style.marginTop = convY({{ stoneList.1.y1 }}) ;
+            document.getElementById(index + "_second").style.marginTop = convX({{ stoneList.1.x2 }}) ;
+            document.getElementById(index + "_second").style.marginTop = convY({{ stoneList.1.y2 }}) ;
+        }
+    }
+ 
+    function convX(x)
+    {# conver X to margin left value #}
+    {
+        var mLeft;
+        switch(x)
+        {
+            case 'A': mLeft = 4+ 0*40 ; break ;
+            case 'B': mLeft = 4+ 1*40 ; break ;
+            case 'C': mLeft = 4+ 2*40 ; break ;
+            case 'D': mLeft = 4+ 3*40 ; break ;
+            case 'E': mLeft = 4+ 4*40 ; break ;
+            case 'F': mLeft = 4+ 5*40 ; break ;
+            case 'G': mLeft = 4+ 6*40 ; break ;
+            case 'H': mLeft = 4+ 7*40 ; break ;
+            case 'I': mLeft = 4+ 8*40 ; break ;
+            case 'J': mLeft = 4+ 9*40 ; break ;
+            case 'K': mLeft = 4+ 10*40 ; break ;
+            case 'L': mLeft = 4+ 11*40 ; break ;
+            case 'M': mLeft = 4+ 12*40 ; break ;
+            case 'N': mLeft = 4+ 13*40 ; break ;
+            case 'O': mLeft = 4+ 14*40 ; break ;
+            case 'P': mLeft = 4+ 15*40 ; break ;
+            case 'Q': mLeft = 4+ 16*40 ; break ;
+            case 'R': mLeft = 4+ 17*40 ; break ;
+            case 'S': mLeft = 4+ 18*40 ; break ;
+        }
+        var result = mLeft.toString() + "px" ;
+        return result;
+    }
+
+    function convY(y)
+    {# conver y to margin top vlaue #}
+    {
+        var mTop = 4 + (19 - y)*40;
+        var result = mTop.toString() + "px" ;
+        return result;
+    }
+</script>
+
+
+
