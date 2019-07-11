@@ -1,43 +1,42 @@
+
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'playgame/style.css' %}">
 
+<input type="button" name="getdata" value="getdata">
+
+
 <div class = "board">
-    <div class = "blackStone" style = "left: 4px; top: 4px;"></div>
-    <div class = "whiteStone" style = "left: 44px; top: 44px;"></div>
-<!--
     {%if stoneList %}
-        <p>{{stoneList}}</p>
         {% for stone in stoneList %}
             {% if stone.id|divisibleby:"2" %}
-                <div id = "{{stone.id}}_first" class = "whiteStone"></div>
-                <div id = "{{stone.id}}_second" class = "whiteStone"></div>
+                <div id = "{{stone.id}}_first" class = "whiteStone">{{stone.id}}</div>
+                <div id = "{{stone.id}}_second" class = "whiteStone">{{stone.id}}</div>
             {% else %}
-                <div id = "{{stone.id}}_first" class = "blackStone"></div>
-                <div id = "{{stone.id}}_second" class = "blackStone">{{stoneList.1.x1}}</div>
+                <div id = "{{stone.id}}_first" class = "blackStone">{{stone.id}}</div>
+                <div id = "{{stone.id}}_second" class = "blackStone">{{stone.id}}</div>
             {% endif %}
         {% endfor %}
     {% endif %}
--->
+
 </div>
 
 <script type="text/javascript">
-
-    for (i=1; i<={{stoneList|length}}; i++)
+    for (i=0; i<{{ stoneList|length }}; i++)
     {
-        var index = i.toString() ;
-        if (i%2 == 0)//white
+        var index = (i+1).toString() ;
+        if (index%2 == 0)//white
         {
-            document.getElementById(index + "_first").style.marginLeft = convX({{ stoneList.2.x1 }}) ;
-            document.getElementById(index + "_first").style.marginTop = convY({{ stoneList.2.y1 }}) ;
-            document.getElementById(index + "_second").style.marginLeft = convX({{ stoneList.2.x2 }}) ;
-            document.getElementById(index + "_second").style.marginTop = convY({{ stoneList.2.y2 }}) ;
+            document.getElementById(index + "_first").style.marginLeft = convX("{{ stoneList.2.x1 }}") ;
+            document.getElementById(index + "_first").style.marginTop = convY("{{ stoneList.2.y1 }}") ;
+            document.getElementById(index + "_second").style.marginLeft = convX("{{ stoneList.2.x2 }}") ;
+            document.getElementById(index + "_second").style.marginTop = convY("{{ stoneList.2.y2 }}") ;
         }
         else//balck
         {
-            document.getElementById(index + "_first").style.marginLeft = convX({{ stoneList.1.x1 }}) ;
-            document.getElementById(index + "_first").style.marginTop = convY({{ stoneList.1.y1 }}) ;
-            document.getElementById(index + "_second").style.marginTop = convX({{ stoneList.1.x2 }}) ;
-            document.getElementById(index + "_second").style.marginTop = convY({{ stoneList.1.y2 }}) ;
+            document.getElementById(index + "_first").style.marginLeft = convX("{{ stoneList.0.x1 }}") ;
+            document.getElementById(index + "_first").style.marginTop = convY("{{ stoneList.0.y1 }}") ;
+            document.getElementById(index + "_second").style.marginLeft = convX("{{ stoneList.0.x2 }}") ;
+            document.getElementById(index + "_second").style.marginTop = convY("{{ stoneList.0.y2 }}") ;
         }
     }
  
@@ -70,7 +69,6 @@
         var result = mLeft.toString() + "px" ;
         return result;
     }
-
     function convY(y)
     {# conver y to margin top vlaue #}
     {
@@ -79,6 +77,3 @@
         return result;
     }
 </script>
-
-
-

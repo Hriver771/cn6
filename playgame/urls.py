@@ -5,6 +5,7 @@ from playgame import views
 urlpatterns = [
     path('', views.index, name='index'),
     url(r'^playgame/$', views.userAPI.as_view()),
+    url(r'^ajax/putStone/$', views.putStone, name='putStone'),
 ]
 
 

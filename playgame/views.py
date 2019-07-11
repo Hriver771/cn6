@@ -13,10 +13,15 @@ from .models import Stones
 
 def index(request):
     stoneList = Stones.objects.all()
-    context = {'stoneList': stoneList}
-    return render(request, 'playgame/index.html', context)
+    data = {'stoneList': stoneList}
+    return render(request, 'playgame/index.html', data)
 
 class userAPI(generics.ListCreateAPIView):
     queryset = Stones.objects.all()
     serializer_class = StoneSerializer
+
+def putStone(request):
+    data = { 'stoneList': Stones.objects.all() }
+    return JsonResponse(data)
+
 
