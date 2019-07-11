@@ -5,6 +5,7 @@
 <input type="button" class="getdata" name="getdata" value="getdata">
 <div id="test">test</div>
 
+<body>
 <div class = "board">
     {%if stoneList %}
         {% for stone in stoneList %}
@@ -19,6 +20,7 @@
     {% endif %}
 
 </div>
+</body>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -31,8 +33,30 @@
             url: '/ajax/getStones',
             dataType: 'json',
             success: function(data) {
-                alert(data);
-            },
+
+                $.each(data, function(index, element) {
+                    if(index % 2 == 0)
+                        var color = "black" ;
+                    else
+                        var color = "white" ;
+                    marginLeft1 = convX(element.x1) ;
+                    marginTop1 = convY(element.y1) ;
+                    marginLeft2 = convX(element.x2) ;
+                    marginTop2 = convY(element.y2) ;
+                    stone1 = '<div class="' + 
+                             color + 'Stone"' +
+                             'style="left: ' + marginLeft1 + ';' +
+                             'top: ' + marginTop1 + ';' +
+                             '"></div>' ;
+                    stone2 = '<div class="' +
+                             color + 'Stone"' +
+                             'style="left: ' + marginLeft2 + ';' +
+                             'top: ' + marginTop2 + ';' +
+                             '"></div>' ;
+                    $('.board').append(stone1 + stone2);
+                });
+
+            }, 
             error: function(xhr, option, error){
 		alert(xhr.status); //error code
             },
