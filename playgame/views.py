@@ -8,6 +8,8 @@ from rest_framework.response import Response
 from playgame.models import Stones
 from playgame.serializers import StoneSerializer
 from rest_framework import generics
+from django.http import JsonResponse
+from django.core.serializers import serialize
 
 from .models import Stones
 
@@ -20,8 +22,7 @@ class userAPI(generics.ListCreateAPIView):
     queryset = Stones.objects.all()
     serializer_class = StoneSerializer
 
-def putStone(request):
-    data = { 'stoneList': Stones.objects.all() }
-    return JsonResponse(data)
-
+class getStones(generics.ListCreateAPIView):
+    queryset = Stones.objects.all()
+    serializer_class = StoneSerializer 
 

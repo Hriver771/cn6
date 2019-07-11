@@ -2,8 +2,8 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'playgame/style.css' %}">
 
-<input type="button" name="getdata" value="getdata">
-
+<input type="button" class="getdata" name="getdata" value="getdata">
+<div id="test">test</div>
 
 <div class = "board">
     {%if stoneList %}
@@ -20,10 +20,28 @@
 
 </div>
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
-    for (i=0; i<{{ stoneList|length }}; i++)
+    
+    $(".getdata").click(function () {
+        var ready = "Do you have a new data?" ;
+
+        $.ajax({
+            type: "get",
+            url: '/ajax/getStones',
+            dataType: 'json',
+            success: function(data) {
+                alert(data);
+            },
+            error: function(xhr, option, error){
+		alert(xhr.status); //error code
+            },
+        });
+    })
+
+    for (i=0; i<{{ stoneList|length }}; i++) //list starts 0
     {
-        var index = (i+1).toString() ;
+        var index = (i+1).toString() ; //id starts 1
         if (index%2 == 0)//white
         {
             document.getElementById(index + "_first").style.marginLeft = convX("{{ stoneList.2.x1 }}") ;
